@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+from __future__ import absolute_import  
 from __future__ import division
 from __future__ import print_function
 
@@ -9,7 +9,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 import tensorflow as tf
 
-FLAGS = None
+FLAGS = None #it is unparsed
 
 
 def main(_):
@@ -38,8 +38,8 @@ def main(_):
       tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y))
   train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 
-  sess = tf.InteractiveSession()
-  tf.global_variables_initializer().run()
+  sess = tf.InteractiveSession() #tensorfow works on sessions
+  tf.global_variables_initializer().run() # for training
   # Train
   for _ in range(1000):
     batch_xs, batch_ys = mnist.train.next_batch(100)
@@ -47,8 +47,8 @@ def main(_):
 
   # Test trained model
   correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
-  accuracy_prob = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-  accuracy = accuracy_prob*100
+  accuracy_prob = tf.reduce_mean(tf.cast(correct_prediction, tf.float32)) # accuracy as a number
+  accuracy = accuracy_prob*100 # accuracy as percentage
   print(sess.run(accuracy, feed_dict={x: mnist.test.images,
                                       y_: mnist.test.labels}))
 
